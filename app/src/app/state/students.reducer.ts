@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { StudentRecords } from "./students-records";
-
+import { studentRecordsActions } from "./students-records.actions";
 export const initState: ReadonlyArray<StudentRecords> = [{
   name: "example name",
    city: "example city",
@@ -18,7 +18,11 @@ export const initState: ReadonlyArray<StudentRecords> = [{
    postalCode: "123456"
 }];
 
-export const studentsReducer = createReducer(initState)
+export const studentsReducer = createReducer(initState,
+  on(studentRecordsActions.callStudentsRecordSuccess, (state, action) => {
+    return action.students
+  })
+)
 
 
 
